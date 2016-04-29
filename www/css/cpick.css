@@ -1,0 +1,22 @@
+h1 {
+	font-size: 16px;
+}
+
+h2 {
+	font-size: 12px;
+	padding-left: 10px;
+	border-left: 10px solid #999999;
+}
+div.cont {
+	margin-left: 1em;
+	margin-bottom: 2em;
+}
+button, select, option, input {
+	font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Meiryo, "メイリオ", Verdana, Arial, Helvetica, "ＭＳ Ｐゴシック", sans-serif;
+	font-size: 12px;
+	vertical-align: middle;
+}
+button {
+	margin-left: 0.3em;
+	margin-right: 0.3em;
+}

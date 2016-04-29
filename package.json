@@ -1,0 +1,17 @@
+{
+  "name": "***",
+  "version": "0.0.1",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engine": {
+    "node": "v0.12.0",
+    "npm": "2.12.0"
+  },
+  "dependencies": {
+    "express": "*",
+    "http": "*",
+    "memcache": "^0.3.0",
+    "socket.io": "*"
+  }
+}
