@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
+var helper = require(__dirname + '/helper');
 
 app.use(express.static('www'));
 
@@ -33,9 +34,9 @@ app.get('/admin/info/:status', function(req, res){
 		io.emit('info', "off");
 		infoStatus = "off";
 	}
-	
+
 	res.end();
-	
+
 });
 
 app.get('/admin/serviceLock/:status', function(req, res){
@@ -44,9 +45,9 @@ app.get('/admin/serviceLock/:status', function(req, res){
 	} else if (req.params.status == "off") {
 		serviceLock = false;
 	}
-	
+
 	res.end();
-	
+
 });
 
 app.get('/admin/headerMsg/:msg', function(req, res){
@@ -57,7 +58,7 @@ app.get('/admin/headerMsg/:msg', function(req, res){
 });
 
 io.on('connection', function(socket){
-	
+
 	socket.emit('info', infoStatus);
 	socket.emit('header', headerMsg);
 
@@ -70,7 +71,7 @@ io.on('connection', function(socket){
 
 		// HTMLタグを弾く
 		msg.body = msg.body.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'');
-		
+
 		if (msg.body.length >= 140)
 			return false;
 
@@ -84,12 +85,37 @@ io.on('connection', function(socket){
 
 	socket.on('pdeFile', function(msg){
 
-		if (!serviceLock) {
-			pdeFile[hashCount] = msg;
+		if (serviceLock) return;
+
+		var pde = msg;
+
+		// スケッチファイルに含まれた画像ファイルのパスを抽出
+		var image_paths = pde.match(/[a-zA-Z0-9_\-\.]+\.(jpg|jpeg|png|gif)/ig);
+		if (image_paths == null || image_paths.length == 0) { // 画像ファイルがなければ
+			// ファイルをメモリへ保存し，ファイル情報を配信
+			pdeFile[hashCount] = pde;
 			io.emit('pdeFile', {id: socket.id, hash: hashCount} );
 			hashCount++;
+			return;
 		}
 
+		// ランダムに画像を取得
+		helper.getRandomImage(function (img_buffer) {
+
+			// 画像をBASE64データへ変更
+			var img_base64 = 'data:image/jpeg;base64,' + img_buffer.toString('base64');
+
+			// スケッチファイルを書き換え
+			image_paths.forEach(function (path, i) {
+				pde = pde.replace(path, img_base64, 'g');
+			});
+
+			// ファイルをメモリへ保存し，ファイル情報を配信
+			pdeFile[hashCount] = pde;
+			io.emit('pdeFile', {id: socket.id, hash: hashCount} );
+			hashCount++;
+
+		});
 	});
 
 });
@@ -97,10 +123,10 @@ io.on('connection', function(socket){
 setInterval(function() {
 
 	viewers = io.eio.clientsCount;
-	
+
 	io.emit('graphUupdate', {viewers: viewers, iSeeCount: iSeeCount});
 	iSeeCount = 0;
-	
+
 }, 500);
 
 server.listen(process.env.PORT || 3000, function(){
