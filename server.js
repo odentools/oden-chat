@@ -8,7 +8,7 @@ app.use(express.static('www'));
 
 var iSeeCount = 0;
 var hashCount = 0;
-var pdeFile = [];
+var pdeFile = [], pdeImgFiles = [];
 
 var infoStatus = "off";
 var serviceLock = false;
@@ -99,15 +99,35 @@ io.on('connection', function(socket){
 			return;
 		}
 
-		// ランダムに画像を取得
+		// Webからランダムな画像を1つ取得
 		helper.getRandomImage(function (img_buffer) {
 
-			// 画像をBASE64データへ変更
-			var img_base64 = 'data:image/jpeg;base64,' + img_buffer.toString('base64');
+			var image_buffers = [];
+			if (img_buffer != null) { // 取得成功ならば
+				image_buffers[0] = img_buffer;
+				// 使いまわせるようにメモリへ保存
+				pdeImgFiles.push(img_buffer);
+			}
+
+			// 取得失敗時 or 2枚目以降の画像が必要なならば，既存画像から選ぶ
+			if (1 <= pdeImgFiles.length) { // 既存画像があれば
+				for (var i = image_buffers.length; i < image_paths.length; i++) {
+					image_buffers[i] = pdeImgFiles[Math.floor(Math.random() * pdeImgFiles.length)];
+				}
+			}
 
 			// スケッチファイルを書き換え
 			image_paths.forEach(function (path, i) {
-				pde = pde.replace(path, img_base64, 'g');
+				var img_uri;
+				if (image_buffers[i] != null) { // 選ばれた画像があれば
+					// 画像をBASE64データへ変更
+					img_uri = 'data:image/jpeg;base64,' + image_buffers[i].toString('base64');
+				} else {
+					// OdenToolsロゴへ変更
+					img_uri = 'img/odentools_logo.png';
+				}
+				// 書き換え
+				pde = pde.replace(path, img_uri, 'g');
 			});
 
 			// ファイルをメモリへ保存し，ファイル情報を配信

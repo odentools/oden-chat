@@ -9,7 +9,7 @@ module.exports = {
 	 */
 	getRandomImage: function (callback) {
 
-		http.get( 'http://lorempixel.com/640/480/food/', function (res) {
+		var req = http.get('http://lorempixel.com/640/480/food/', function (res) {
 
 			var data = [];
 
@@ -22,6 +22,16 @@ module.exports = {
 				callback(buf);
 			});
 
+		});
+
+		req.setTimeout(6000, function () {
+			console.log('Could not get a random image - timeout');
+			req.abort();
+		});
+
+		req.on('error', function(e) {
+			console.log('Could not get a random image');
+			callback(null);
 		});
 
 	}
