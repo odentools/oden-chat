@@ -13,6 +13,10 @@ var infoStatus = "off";
 var serviceLock = false;
 var headerMsg = "Ｃ＋＋１　Processingで作った，みんなのプログラムをドラッグ・アンド・ドロップしてみよう！";
 
+app.get('/*.jpg', function(req, res){
+	res.end();
+});
+
 app.get('/pde/:id', function(req, res){
 	res.send(pdeFile[req.params.id]);
 });
