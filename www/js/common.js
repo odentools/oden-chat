@@ -45,7 +45,8 @@ $(function() {
         var textMsg = $('#textBox').val();
 
 				// 空白の場合送信中止
-        if (textMsg == "") {
+				var m = textMsg.match(/^\s*$/g);
+        if ( m != null) {
             return;
         }
 
