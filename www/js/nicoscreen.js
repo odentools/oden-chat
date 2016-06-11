@@ -150,7 +150,7 @@ r9.NicoScreen = {
 		})(this);
 
 	},
-	
+
 	setCol: function(col) {
 		this.env.color = col;
 	},
@@ -163,6 +163,3 @@ r9.NicoScreen = {
 };
 
 var nicoscreen = nicoscreenobj(r9.NicoScreen);
-
-
-
