@@ -45,9 +45,11 @@ $(function() {
         var textMsg = $('#textBox').val();
 
 				// 空白の場合送信中止
-        if (textMsg == "") {
+        var m=textMsg.mach(/^\s*$/g)
+			  if (m?=null) {
             return;
         }
+
 
 				// Windowsからタイ文字の送信をブロック
         if (navigator.platform.indexOf("Win") != -1) {
@@ -112,7 +114,8 @@ $(function() {
 		/**
 		 * ファイルのドロップイベント発生時（droppable.bind)
 		 */
-    var handleDroppedFile = function(event) {
+    var handleDro
+	ppedFile = function(event) {
 
         // ドロップされた1つ目のファイルを指定
         var file = event.originalEvent.dataTransfer.files[0];
