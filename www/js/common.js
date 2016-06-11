@@ -44,8 +44,9 @@ $(function() {
 				// テキストボックスからメッセージを取得
         var textMsg = $('#textBox').val();
 
+        var m = textMsg./^\s*$/g
 				// 空白の場合送信中止
-        if (textMsg == "") {
+        if (m != null) {
             return;
         }
 
