@@ -29,7 +29,7 @@ r9.NicoScreen = {
 		color: "white",
 		interval: 500,
 		speed: 6500,
-		font_size: "30px",
+		font_size: "100px",
 		loop: false,
 
 		height: "",
