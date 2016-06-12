@@ -1,4 +1,5 @@
 var moji=30;
+var batten=[];
 $(function() {
 
 
@@ -44,7 +45,7 @@ $(function() {
 
 				// テキストボックスからメッセージを取得
         var textMsg = $('#textBox').val();
-
+        console.log(textMsg);
 				// 空白の場合送信中止
 				var m = textMsg.match(/^\s*$/g);
 				console.log(m);
@@ -74,6 +75,10 @@ $(function() {
 
     };
 
+		var setBatten=function(){
+			var NGword=$('#NGbox').val();
+			batten.push(NGword);
+		}
 
 		/**
 		 * 現在時刻の取得
@@ -197,6 +202,10 @@ $(function() {
 				return false;	// clickイベントのキャンセル
     });
 
+		$('#batten').click(function() {
+     setBatten();
+			return false;
+		});
 
 		/*　----　*/
 
