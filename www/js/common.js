@@ -1,3 +1,4 @@
+var moji=30;
 $(function() {
 
 
@@ -64,7 +65,8 @@ $(function() {
 				// サーバにメッセージを送信
         socket.emit('newMessage', {
             body: textMsg,						// メッセージ
-            color: $('#color').val()	// 文字色
+            color: $('#color').val(),	// 文字色
+						size: moji+"px"
         });
 
 				// メッセージボックスを空にする
@@ -160,6 +162,20 @@ $(function() {
 				return false;	// clickイベントのキャンセル
     });
 
+		$('#large').click(function() {
+			moji=150;
+			return false;
+		});
+
+		$('#medium').click(function() {
+			moji=100;
+			return false;
+		});
+
+		$('#small').click(function() {
+			moji=50;
+			return false;
+		});
 
 		/**
 		 * テキストボックにて，Enter入力時（イベントリスナー）
@@ -194,7 +210,7 @@ $(function() {
         $('#chatArea').prepend($('<tr><td>' + getTime() + '<td>' + msg.id + '<td>' + msg.body + '</tr>'));
 
 				// 画面上を流れるコメントを追加
-        nicoscreen.add(msg.body, msg.color);
+        nicoscreen.add(msg.body, msg.color,msg.size);
 
     });
 
