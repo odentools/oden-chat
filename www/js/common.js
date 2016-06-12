@@ -47,7 +47,8 @@ $(function() {
 
 				// 空白の場合送信中止
 				var m = textMsg.match(/^\s*$/g);
-        if (m!=null) {
+
+        if ( m != null) {
             return;
         }
 
