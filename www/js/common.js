@@ -204,7 +204,15 @@ $(function() {
 		/**
 		 *　新規メッセージ受信時
 		 */
+
+		var hoge = "";
     socket.on('newMessage', function(msg) {
+
+				var ng = msg.body.indexOf(hoge);
+				if (ng!=-1) {
+						console.log("NG");
+						return;
+					}
 
 				// チャットエリアにメッセージの追加
         $('#chatArea').prepend($('<tr><td>' + getTime() + '<td>' + msg.id + '<td>' + msg.body + '</tr>'));
