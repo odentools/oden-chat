@@ -1,3 +1,8 @@
+<<<<<<< Updated upstream
+=======
+var moji=60;
+var batten=[];
+>>>>>>> Stashed changes
 $(function() {
 
 
@@ -152,6 +157,7 @@ $(function() {
 
 		/* ---- */
 
+<<<<<<< Updated upstream
 
 		/**
 		 * 送信ボタンクリック時（イベントリスナー）
@@ -161,6 +167,33 @@ $(function() {
 				return false;	// clickイベントのキャンセル
     });
 
+=======
+	$('#large').click(function() {
+		moji=100;
+		return false;
+	});
+
+	$('#medium').click(function() {
+		moji=60;
+		return false;
+	});
+
+	$('#small').click(function() {
+		moji=40;
+		return false;
+	});
+
+	/**
+	* テキストボックにて，Enter入力時（イベントリスナー）
+	*/
+	$('#textBox').keydown(function(e) {
+		// キーコードがEnterの場合
+		if (e.keyCode === 13)	{
+			sendMsg();
+			return false;
+		}
+	});
+>>>>>>> Stashed changes
 
 		/**
 		 * テキストボックにて，Enter入力時（イベントリスナー）
