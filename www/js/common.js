@@ -1,8 +1,6 @@
-<<<<<<< Updated upstream
-=======
 var moji=60;
 var batten=[];
->>>>>>> Stashed changes
+
 $(function() {
 
 
@@ -119,8 +117,7 @@ $(function() {
 		/**
 		 * ファイルのドロップイベント発生時（droppable.bind)
 		 */
-    var handleDro
-	ppedFile = function(event) {
+    var handleDroppedFile = function(event) {
 
         // ドロップされた1つ目のファイルを指定
         var file = event.originalEvent.dataTransfer.files[0];
@@ -157,7 +154,6 @@ $(function() {
 
 		/* ---- */
 
-<<<<<<< Updated upstream
 
 		/**
 		 * 送信ボタンクリック時（イベントリスナー）
@@ -167,7 +163,7 @@ $(function() {
 				return false;	// clickイベントのキャンセル
     });
 
-=======
+
 	$('#large').click(function() {
 		moji=100;
 		return false;
@@ -182,18 +178,6 @@ $(function() {
 		moji=40;
 		return false;
 	});
-
-	/**
-	* テキストボックにて，Enter入力時（イベントリスナー）
-	*/
-	$('#textBox').keydown(function(e) {
-		// キーコードがEnterの場合
-		if (e.keyCode === 13)	{
-			sendMsg();
-			return false;
-		}
-	});
->>>>>>> Stashed changes
 
 		/**
 		 * テキストボックにて，Enter入力時（イベントリスナー）
