@@ -47,8 +47,8 @@ $(function() {
 		var textMsg = $('#textBox').val();
 		console.log(textMsg);
 		// 空白の場合送信中止
-    var m=textMsg.mach(/^\s*$/g)
-		if (m?=null) {
+    var m=textMsg.match(/^\s*$/g);
+		if (m!=null) {
 			return;
     }
 
@@ -194,12 +194,12 @@ $(function() {
   });
 
 	/**
-	* テキストボックにて，Enter入力時（イベントリスナー）
+	* NGボックスにて，Enter入力時（イベントリスナー）
 	*/
-	$('#textBox').keydown(function(e) {
+	$('#NGbox').keydown(function(e) {
 		// キーコードがEnterの場合
 		if (e.keyCode === 13)	{
-			sendMsg();
+			setBatten();
 			return false;
 		}
 	});
