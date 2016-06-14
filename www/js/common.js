@@ -1,5 +1,6 @@
-var moji=100;
+var moji=60;
 var batten=[];
+
 $(function() {
 
 	// サーバへ接続
@@ -46,11 +47,10 @@ $(function() {
 		var textMsg = $('#textBox').val();
 		console.log(textMsg);
 		// 空白の場合送信中止
-		var m = textMsg.match(/^\s*$/g);
-
-		if ( m != null) {
+    var m=textMsg.mach(/^\s*$/g)
+		if (m?=null) {
 			return;
-		}
+    }
 
 		// Windowsからタイ文字の送信をブロック
 		if (navigator.platform.indexOf("Win") != -1) {
@@ -168,19 +168,30 @@ $(function() {
 	});
 
 	$('#large').click(function() {
-		moji=150;
-		return false;
-	});
-
-	$('#medium').click(function() {
 		moji=100;
 		return false;
 	});
 
-	$('#small').click(function() {
-		moji=50;
+	$('#medium').click(function() {
+		moji=60;
 		return false;
 	});
+
+	$('#small').click(function() {
+		moji=40;
+		return false;
+	});
+
+	/**
+	 * テキストボックにて，Enter入力時（イベントリスナー）
+	 */
+	$('#textBox').keydown(function(e) {
+		// キーコードがEnterの場合
+      if (e.keyCode === 13)	{
+          sendMsg();
+					return false;
+			}
+  });
 
 	/**
 	* テキストボックにて，Enter入力時（イベントリスナー）
