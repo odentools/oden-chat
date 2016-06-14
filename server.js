@@ -106,7 +106,8 @@ io.on('connection', function(socket) {
         io.emit('newMessage', {
             body: msg.body,
             id: socket.id,
-            color: msg.color
+            color: msg.color,
+            size: msg.size
         });
 
     });

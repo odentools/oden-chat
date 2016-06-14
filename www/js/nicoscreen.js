@@ -29,7 +29,7 @@ r9.NicoScreen = {
 		color: "white",
 		interval: 500,
 		speed: 6500,
-		font_size: "30px",
+		font_size: "100px",
 		loop: false,
 
 		height: "",
@@ -155,8 +155,13 @@ r9.NicoScreen = {
 		this.env.color = col;
 	},
 
-	add: function(str, col) {
+	setSize: function(size) {
+		this.env.font_size = size;
+	},
+
+	add: function(str, col, size) {
 		this.setCol(col);
+		this.setSize(size);
 		this.draw(str);
 	}
 
