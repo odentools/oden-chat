@@ -583,7 +583,7 @@ button, input[type="submit"], input[type="button"] {
 
   .NGbtn {
     display: inline-block;
-    min-width: 120px;
+    min-width: 30px;
     padding: 10px 35px;
     margin-bottom: 1em;
     border: none;
@@ -746,7 +746,7 @@ button, input[type="submit"], input[type="button"] {
 
 .btn {
   display: inline-block;
-  min-width: 120px;
+  min-width: 30px;
   padding: 10px 25px;
   margin-bottom: 1em;
   border: none;
