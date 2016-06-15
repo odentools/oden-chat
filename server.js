@@ -92,7 +92,8 @@ io.on('connection', function(socket) {
         if (msg.body == "/w-num") {
             io.emit('newMessage', {
                 body: socket.client.conn.server.clientsCount,
-                id: "SRV"
+                id: "SRV",
+                size: msg.size
             });
             return false;
         }
