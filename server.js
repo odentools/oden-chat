@@ -85,6 +85,10 @@ io.on('connection', function(socket) {
     socket.emit('info', infoStatus);
     socket.emit('header', headerMsg);
 
+    // 運営メッセージの表示命令を送信
+    io.emit('info', "on");
+    infoStatus = "on";
+
     // メッセージ受信時
     socket.on('newMessage', function(msg) {
 
@@ -92,7 +96,8 @@ io.on('connection', function(socket) {
         if (msg.body == "/w-num") {
             io.emit('newMessage', {
                 body: socket.client.conn.server.clientsCount,
-                id: "SRV"
+                id: "SRV",
+                size: msg.size
             });
             return false;
         }
@@ -106,7 +111,8 @@ io.on('connection', function(socket) {
         io.emit('newMessage', {
             body: msg.body,
             id: socket.id,
-            color: msg.color
+            color: msg.color,
+            size: msg.size
         });
 
     });
