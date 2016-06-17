@@ -45,7 +45,6 @@ $(function() {
 
 		// テキストボックスからメッセージを取得
 		var textMsg = $('#textBox').val();
-		console.log(textMsg);
 
 		// 空白の場合送信中止
     var m=textMsg.match(/^\s*$/g);
@@ -227,14 +226,13 @@ $(function() {
 	*/
 
 	socket.on('newMessage', function(msg) {
-		for(var i=0;batten.length;i++){
-			var ng = msg.body.indexOf(batten[i]);
-			if (ng!=-1) {
+		for(var i=0;i < batten.length;i++){
+			if (msg.body.indexOf(batten[i]) != -1) {
 				console.log("NG");
 				return;
 			}
-
 		}
+
 
 		// チャットエリアにメッセージの追加
 		$('#chatArea').prepend($('<tr><td>' + getTime() + '<td>' + msg.id + '<td>' + msg.body + '</tr>'));
