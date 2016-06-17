@@ -46,6 +46,7 @@ $(function() {
 		// テキストボックスからメッセージを取得
 		var textMsg = $('#textBox').val();
 		console.log(textMsg);
+
 		// 空白の場合送信中止
     var m=textMsg.match(/^\s*$/g);
 		if (m!=null) {
@@ -281,7 +282,7 @@ $(function() {
 	* 運営メッセージの書き換え命令受信時
 	*/
 	socket.on('header', function(msg) {
-		$('header div').html(msg);
+	//	$('header div').html(msg);
 	});
 
 

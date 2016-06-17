@@ -85,6 +85,10 @@ io.on('connection', function(socket) {
     socket.emit('info', infoStatus);
     socket.emit('header', headerMsg);
 
+    // 運営メッセージの表示命令を送信
+    io.emit('info', "on");
+    infoStatus = "on";
+
     // メッセージ受信時
     socket.on('newMessage', function(msg) {
 
